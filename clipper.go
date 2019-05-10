@@ -28,9 +28,6 @@ import (
 	"math"
 )
 
-//func _DBG(f func()) { f() }
-func _DBG(f func()) {}
-
 type polygonType int
 
 const (
