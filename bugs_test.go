@@ -137,7 +137,7 @@ func TestBug3(t *T) {
 	}.verify(t)
 }
 
-func TestOverlappingSegments(t *T) {
+func TestResweepingIntersectingEndpoints(t *T) {
 	testCases{
 		{
 			op: polyclip.INTERSECTION,
