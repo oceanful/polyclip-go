@@ -45,7 +45,7 @@ type endpoint struct {
 func (e endpoint) String() string {
 	sleft := map[bool]string{true: "left", false: "right"}
 	return fmt.Sprint("{", e.p, " ", sleft[e.left], " type:", e.polygonType,
-		" other:", e.other.p, " inout:", e.inout, " inside:", e.inside, " edgeType:", e.edgeType, "}")
+		" other(inside:", e.other.inside, "):", e.other.p, " inout:", e.inout, " inside:", e.inside, " edgeType:", e.edgeType, "}")
 }
 
 func (e1 *endpoint) equals(e2 *endpoint) bool {
