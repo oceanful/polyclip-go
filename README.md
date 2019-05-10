@@ -1,8 +1,7 @@
 ## About
 
-[![Build Status on Travis-CI.](https://travis-ci.org/akavel/polyclip-go.svg?branch=master)](https://travis-ci.org/akavel/polyclip-go)
 ![License: MIT.](https://img.shields.io/badge/license-MIT-orange.svg)
-[![Documentation on godoc.org.](https://godoc.org/github.com/akavel/polyclip-go?status.svg)](https://godoc.org/github.com/akavel/polyclip-go)
+[![Documentation on godoc.org.](https://godoc.org/github.com/oceanful/polyclip-go?status.svg)](https://godoc.org/github.com/oceanful/polyclip-go)
 
 Library polyclip-go is a pure Go, MIT-licensed implementation of an [algorithm for Boolean operations on 2D polygons][fmartin] (invented by F. Martínez, A.J. Rueda, F.R. Feito) -- that is, for calculation of polygon intersection, union, difference and xor.
 
@@ -28,7 +27,7 @@ Simplest Go program using polyclip-go for calculating intersection of a square a
 
     import (
         "fmt"
-        "github.com/akavel/polyclip-go" // or: bitbucket.org/...
+        "github.com/oceanful/polyclip-go"
     )
 
     func main() {
@@ -42,13 +41,13 @@ Simplest Go program using polyclip-go for calculating intersection of a square a
 
 To compile and run the program above, execute the usual sequence of commands:
 
-    go get github.com/akavel/polyclip-go  # or: bitbucket.org/...
+    go get github.com/oceanful/polyclip-go
     go build example.go
     ./example      # Windows: example.exe
 
-For full package documentation, run locally `godoc github.com/akavel/polyclip-go`, or visit [online documentation for polyclip-go][godoc].
+For full package documentation, run locally `godoc github.com/oceanful/polyclip-go`, or visit [online documentation for polyclip-go][godoc].
 
-[godoc]: http://godoc.org/github.com/akavel/polyclip-go
+[godoc]: http://godoc.org/github.com/oceanful/polyclip-go
 
 See also
 
