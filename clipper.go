@@ -203,10 +203,13 @@ func (c *clipper) compute(operation Op) Polygon {
 			// Process a possible intersection between "e" and its previous neighbor in S
 			if prev != nil {
 				divided := c.possibleIntersection(prev, e)
+				// If [prev] was divided, the context (sweep line S) for [e] may have changed,
+				// altering what e.inout and e.inside should be. [e] must thus be reenqueued to
+				// recompute e.inout and e.inside.
+				//
+				// (This should not be done if [e] was also divided; in that case
+				//  the divided segments are already enqueued).
 				if len(divided) == 1 && divided[0] == prev {
-					// If the "prev" endpoint was divided, the context (i.e. sweep line S) for this endpoint
-					// has changed, potentially alternating what e.inout and e.inside should be. The endpoint
-					// must thus be reenqueued to recompute e.inout and e.inside.
 					S.remove(e)
 					c.eventQueue.enqueue(e)
 				}
