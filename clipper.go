@@ -213,7 +213,6 @@ func (c *clipper) compute(operation Op) Polygon {
 					S.remove(e)
 					c.eventQueue.enqueue(e)
 				}
-				//c.possibleIntersection(&e, prev)
 			}
 		} else { // the line segment must be removed from S
 			otherPos := -1
@@ -392,8 +391,6 @@ func findIntersection2(u0, u1, v0, v1 float64, w *[]float64) int {
 
 // Returns the endpoints that were divided.
 func (c *clipper) possibleIntersection(e1, e2 *endpoint) []*endpoint {
-	// [MC]: commented fragment removed
-
 	numIntersections, ip1, _ := findIntersection(e1.segment(), e2.segment(), true)
 
 	if numIntersections == 0 {
