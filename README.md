@@ -49,9 +49,7 @@ For full package documentation, run locally `godoc github.com/oceanful/polyclip-
 
 [godoc]: http://godoc.org/github.com/oceanful/polyclip-go
 
-See also
-
----
+## See also
 
 - [Online docs for polyclip-go][godoc].
 - Microsite about [the original algorithm][fmartin], from its authors (with PDF, and public-domain code in C++).
