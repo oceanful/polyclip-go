@@ -50,9 +50,7 @@ For full package documentation, run locally `godoc github.com/akavel/polyclip-go
 
 [godoc]: http://godoc.org/github.com/akavel/polyclip-go
 
-See also
-
----
+## See also
 
 - [Online docs for polyclip-go][godoc].
 - Microsite about [the original algorithm][fmartin], from its authors (with PDF, and public-domain code in C++).
