@@ -7,7 +7,7 @@ import (
 	. "testing"
 	"time"
 
-	polyclip "github.com/oceanful/polyclip-go"
+	polyclip "github.com/akavel/polyclip-go"
 )
 
 type sorter polyclip.Polygon
