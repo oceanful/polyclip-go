@@ -290,7 +290,6 @@ func TestResweepingIntersectingEndpoints(t *T) {
 func TestIntersectionFalsePositives(t *T) {
 	testCases{
 		{
-			// Requires sqrEpsilon <= 1e-21
 			op: polyclip.INTERSECTION,
 			subject: polyclip.Polygon{{
 				{100.0000001, 100},
@@ -313,7 +312,6 @@ func TestIntersectionFalsePositives(t *T) {
 			}},
 		},
 		{
-			// Requires sqrEpsilon > 1e-22 or sqrEpsilon > 1e-23
 			op: polyclip.INTERSECTION,
 			subject: polyclip.Polygon{{
 				{100.00000001, 100},
