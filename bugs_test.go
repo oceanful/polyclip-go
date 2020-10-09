@@ -109,6 +109,66 @@ func (cases testCases) verify(t *T) {
 	}
 }
 
+func TestBug3(t *T) {
+	testCases{
+		// original reported github issue #3
+		{
+			op:      polyclip.UNION,
+			subject: polyclip.Polygon{{{1, 1}, {1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{
+				{{2, 1}, {2, 2}, {3, 2}, {3, 1}},
+				{{1, 2}, {1, 3}, {2, 3}, {2, 2}},
+				{{2, 2}, {2, 3}, {3, 3}, {3, 2}}},
+			result: polyclip.Polygon{{
+				{1, 1}, {2, 1}, {3, 1},
+				{3, 2}, {3, 3},
+				{2, 3}, {1, 3},
+				{1, 2}}},
+		},
+		// simplified variant of issue #3, for easier debugging
+		{
+			op:      polyclip.UNION,
+			subject: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{
+				{{2, 1}, {2, 2}, {3, 2}},
+				{{1, 2}, {2, 3}, {2, 2}},
+				{{2, 2}, {2, 3}, {3, 2}}},
+			result: polyclip.Polygon{{{1, 2}, {2, 3}, {3, 2}, {2, 1}}},
+		},
+		{
+			op:      polyclip.UNION,
+			subject: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{
+				{{1, 2}, {2, 3}, {2, 2}},
+				{{2, 2}, {2, 3}, {3, 2}}},
+			result: polyclip.Polygon{{{1, 2}, {2, 3}, {3, 2}, {2, 2}, {2, 1}}},
+		},
+		// another variation, now with single degenerated curve
+		{
+			op:      polyclip.UNION,
+			subject: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{
+				{{1, 2}, {2, 3}, {2, 2}, {2, 3}, {3, 2}}},
+			result: polyclip.Polygon{{{1, 2}, {2, 3}, {3, 2}, {2, 2}, {2, 1}}},
+		},
+		{
+			op:      polyclip.UNION,
+			subject: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{
+				{{2, 1}, {2, 2}, {2, 3}, {3, 2}},
+				{{1, 2}, {2, 3}, {2, 2}}},
+			result: polyclip.Polygon{{{1, 2}, {2, 3}, {3, 2}, {2, 1}}},
+		},
+		// "union" with effectively empty polygon (wholly self-intersecting)
+		{
+			op:       polyclip.UNION,
+			subject:  polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+			clipping: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 3}, {1, 2}, {2, 2}, {2, 3}}}.MakeValid(),
+			result:   polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
+		},
+	}.verify(t)
+}
+
 func TestResweepingIntersectingEndpoints(t *T) {
 	testCases{
 		{
