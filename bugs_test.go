@@ -7,7 +7,7 @@ import (
 	. "testing"
 	"time"
 
-	polyclip "github.com/akavel/polyclip-go"
+	polyclip "github.com/oceanful/polyclip-go"
 )
 
 type sorter polyclip.Polygon
@@ -163,7 +163,7 @@ func TestBug3(t *T) {
 		{
 			op:       polyclip.UNION,
 			subject:  polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
-			clipping: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 3}, {1, 2}, {2, 2}, {2, 3}}},
+			clipping: polyclip.Polygon{{{1, 2}, {2, 2}, {2, 3}, {1, 2}, {2, 2}, {2, 3}}}.MakeValid(),
 			result:   polyclip.Polygon{{{1, 2}, {2, 2}, {2, 1}}},
 		},
 	}.verify(t)

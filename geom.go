@@ -224,6 +224,21 @@ const (
 	_MAKE_VALID
 )
 
+func (o Op) String() string {
+	switch o {
+	case UNION:
+		return "UNION"
+	case INTERSECTION:
+		return "INTERSECTION"
+	case DIFFERENCE:
+		return "DIFFERENCE"
+	case XOR:
+		return "XOR"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 // Construct computes a 2D polygon, which is a result of performing
 // specified Boolean operation on the provided pair of polygons (p <Op> clipping).
 // It uses algorithm described by F. Martínez, A. J. Rueda, F. R. Feito

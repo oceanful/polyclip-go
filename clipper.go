@@ -29,15 +29,23 @@ import (
 	"sort"
 )
 
-//func _DBG(f func()) { f() }
-func _DBG(f func()) {}
-
 type polygonType int
 
 const (
 	_SUBJECT polygonType = iota
 	_CLIPPING
 )
+
+func (p polygonType) String() string {
+	switch p {
+	case _SUBJECT:
+		return "SUBJECT"
+	case _CLIPPING:
+		return "CLIPPING"
+	default:
+		return "UNKNOWN"
+	}
+}
 
 type edgeType int
 
@@ -48,6 +56,21 @@ const (
 	_EDGE_DIFFERENT_TRANSITION
 )
 
+func (e edgeType) String() string {
+	switch e {
+	case _EDGE_NORMAL:
+		return "NORMAL"
+	case _EDGE_NON_CONTRIBUTING:
+		return "NON_CONTRIBUTING"
+	case _EDGE_SAME_TRANSITION:
+		return "SAME_TRANSITION"
+	case _EDGE_DIFFERENT_TRANSITION:
+		return "DIFF_TRANSITION"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 // This class contains methods for computing clipping operations on polygons.
 // It implements the algorithm for polygon intersection given by Francisco Martínez del Río.
 // See http://wwwdi.ujaen.es/~fmartin/bool_op.html
@@ -57,6 +80,9 @@ type clipper struct {
 }
 
 func (c *clipper) compute(operation Op) Polygon {
+	_DBG(func() {
+		fmt.Printf("\n== %v:\n - SUBJECT: %v\n - CLIPPING: %v\n", operation, c.subject, c.clipping)
+	})
 
 	// Test 1 for trivial result case
 	if len(c.subject)*len(c.clipping) == 0 {
@@ -118,10 +144,10 @@ func (c *clipper) compute(operation Op) Polygon {
 		}
 	})
 
-	for !c.eventQueue.IsEmpty() {
+	for i := 0; !c.eventQueue.IsEmpty(); i++ {
 		var prev, next *endpoint
 		e := c.eventQueue.dequeue()
-		_DBG(func() { fmt.Printf("\nProcess event: (of %d)\n%v\n", len(c.eventQueue.elements)+1, *e) })
+		_DBG(func() { fmt.Printf("\nProcess event: (%d of %d)\n%v\n", i, len(c.eventQueue.elements)+1, *e) })
 
 		// optimization 1
 		switch {
